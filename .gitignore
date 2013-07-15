@@ -1,0 +1,9 @@
+tmp
+bin
+build
+.xcworkspacedata
+.xcsettings
+.xcuserstate
+xcuserdata
+project.xcworkspace
+*.zip
