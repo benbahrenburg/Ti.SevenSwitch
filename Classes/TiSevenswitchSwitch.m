@@ -5,6 +5,8 @@
  */
 
 #import "TiSevenswitchSwitch.h"
+#import "TiViewProxy.h"
+#import "TiUtils.h"
 
 @implementation TiSevenswitchSwitch
 
@@ -17,15 +19,8 @@
 {
 	if (switchView==nil)
 	{
-		switchView = [[SevenSwitch alloc] init];
+		switchView = [[SevenSwitch alloc] initWithFrame:[self bounds]];
 		[switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-        //Set the defaults
-        switchView.knobColor = [UIColor colorWithRed:0.19f green:0.23f blue:0.33f alpha:1.00f];
-        switchView.activeColor = [UIColor colorWithRed:0.07f green:0.09f blue:0.11f alpha:1.00f];
-        switchView.inactiveColor = [UIColor colorWithRed:0.07f green:0.09f blue:0.11f alpha:1.00f];
-        switchView.onColor = [UIColor colorWithRed:0.45f green:0.58f blue:0.67f alpha:1.00f];
-        switchView.borderColor = [UIColor clearColor];
-        switchView.shadowColor = [UIColor blackColor];
         
 		[self addSubview:switchView];
 	}
@@ -135,7 +130,7 @@
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
 	[super frameSizeChanged:frame bounds:bounds];
-	[self setCenter:[self center]];
+    [self setCenter:[self center]];
 }
 
 -(void)setCenter:(CGPoint)center

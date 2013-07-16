@@ -4,36 +4,18 @@
 // to users on how to use it by example.
 
 
+// TODO: write your module tests here
+var mod = require('ti.sevenswitch');
+Ti.API.info("module is => " + mod);
+
 // open a single window
 var win = Ti.UI.createWindow({
 	backgroundColor:'white'
 });
-var label = Ti.UI.createLabel();
-win.add(label);
+
+var mySwitch = mod.createSwitch({
+	top:20, height:80, width:250, left:20, value:true
+});
+win.add(mySwitch);
+
 win.open();
-
-// TODO: write your module tests here
-var SevenSwitch = require('ti.sevenswitch');
-Ti.API.info("module is => " + SevenSwitch);
-
-label.text = SevenSwitch.example();
-
-Ti.API.info("module exampleProp is => " + SevenSwitch.exampleProp);
-SevenSwitch.exampleProp = "This is a test value";
-
-if (Ti.Platform.name == "android") {
-	var proxy = SevenSwitch.createExample({
-		message: "Creating an example Proxy",
-		backgroundColor: "red",
-		width: 100,
-		height: 100,
-		top: 100,
-		left: 150
-	});
-
-	proxy.printMessage("Hello world!");
-	proxy.message = "Hi world!.  It's me again.";
-	proxy.printMessage("Hello world!");
-	win.add(proxy);
-}
-
