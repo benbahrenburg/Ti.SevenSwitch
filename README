@@ -3,9 +3,9 @@
 The Ti.SevenSwitch project allows you to use [Ben Vogelzang's](https://github.com/bvogelzang) awesome open source [SevenSwitch](https://github.com/bvogelzang/SevenSwitch) project in your Titanium iOS app.
 
 
-![Animation](https://raw.github.com/bvogelzang/SevenSwitch/master/demo.gif)
+![Animation](https://raw.github.com/benbahrenburg/Ti.SevenSwitch/master/demo.gif)
 
-![Default](https://raw.github.com/bvogelzang/SevenSwitch/master/demo.png)
+![Default](https://raw.github.com/benbahrenburg/Ti.SevenSwitch/master/demo.png)
 
 
 <h2>Before you start</h2>
