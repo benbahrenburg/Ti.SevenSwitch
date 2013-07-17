@@ -41,6 +41,5 @@
 @property (nonatomic, strong) UIImage *offImage;
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
-- (void)resizeControl;
 
 @end

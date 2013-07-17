@@ -116,10 +116,9 @@
 }
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
-{
+{    
     [super frameSizeChanged:frame bounds:bounds];
     [switchView setFrame:frame];
-    [switchView resizeControl];
     [self setCenter:[self center]];
 }
 

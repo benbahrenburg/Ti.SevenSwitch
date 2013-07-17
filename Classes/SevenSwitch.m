@@ -223,6 +223,13 @@
     knob.frame = CGRectMake(1, 1, frame.size.height - 2, frame.size.height - 2);
     knob.layer.cornerRadius = self.isRounded ? (frame.size.height * 0.5) - 1 : 2;
 }
+
+- (void)setFrame:(CGRect)newRect
+{
+    [super setFrame:newRect];
+    self.updateDimensions;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -287,10 +294,6 @@
  */
 - (void)setOn:(BOOL)isOn {
     [self setOn:isOn animated:NO];
-}
-
-- (void)resizeControl {
-    [self updateDimensions];
 }
 
 /*
