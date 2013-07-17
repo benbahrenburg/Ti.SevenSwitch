@@ -208,24 +208,27 @@
 }
 
 
+- (void)updateDimensions{
+    CGRect frame = self.frame;
+    
+    // background
+    background.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    background.layer.cornerRadius = self.isRounded ? frame.size.height * 0.5 : 2;
+    
+    // images
+    onImageView.frame = CGRectMake(0, 0, frame.size.width - frame.size.height, frame.size.height);
+    offImageView.frame = CGRectMake(frame.size.height, 0, frame.size.width - frame.size.height, frame.size.height);
+    
+    // knob
+    knob.frame = CGRectMake(1, 1, frame.size.height - 2, frame.size.height - 2);
+    knob.layer.cornerRadius = self.isRounded ? (frame.size.height * 0.5) - 1 : 2;
+}
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (!isAnimating) {
-        CGRect frame = self.frame;
-        
-        // background
-        background.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-        background.layer.cornerRadius = self.isRounded ? frame.size.height * 0.5 : 2;
-        
-        // images
-        onImageView.frame = CGRectMake(0, 0, frame.size.width - frame.size.height, frame.size.height);
-        offImageView.frame = CGRectMake(frame.size.height, 0, frame.size.width - frame.size.height, frame.size.height);
-        
-        // knob
-        knob.frame = CGRectMake(1, 1, frame.size.height - 2, frame.size.height - 2);
-        knob.layer.cornerRadius = self.isRounded ? (frame.size.height * 0.5) - 1 : 2;
-    }
+   if (!isAnimating) {
+       self.updateDimensions;
+   }
 }
 
 - (void)setInactiveColor:(UIColor *)color {
@@ -286,6 +289,9 @@
     [self setOn:isOn animated:NO];
 }
 
+- (void)resizeControl {
+    [self updateDimensions];
+}
 
 /*
  * Set the state of the switch to On or Off, optionally animating the transition.

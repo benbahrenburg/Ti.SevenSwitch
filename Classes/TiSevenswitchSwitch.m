@@ -19,7 +19,7 @@
 {
 	if (switchView==nil)
 	{
-		switchView = [[SevenSwitch alloc] initWithFrame:[self bounds]];
+		switchView = [[SevenSwitch alloc]  initWithFrame:[self bounds]];
 		[switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         
 		[self addSubview:switchView];
@@ -65,44 +65,32 @@
 -(void)setKnobColor_:(id)value
 {
     TiColor *newColor = [TiUtils colorValue:value];
-	UIColor *clr = [newColor _color];
-	SevenSwitch *sw = [self switchView];
-    sw.knobColor = clr;
+	[self switchView].knobColor = [newColor _color];
 }
 -(void)setActiveColor_:(id)value
 {
     TiColor *newColor = [TiUtils colorValue:value];
-	UIColor *clr = [newColor _color];
-	SevenSwitch *sw = [self switchView];
-    sw.knobColor = clr;
+	[self switchView].activeColor=[newColor _color];
 }
 -(void)setInactiveColor_:(id)value
 {
     TiColor *newColor = [TiUtils colorValue:value];
-	UIColor *clr = [newColor _color];
-	SevenSwitch *sw = [self switchView];
-    sw.knobColor = clr;
+	[self switchView].inactiveColor = [newColor _color];
 }
 -(void)setOnColor_:(id)value
 {
     TiColor *newColor = [TiUtils colorValue:value];
-	UIColor *clr = [newColor _color];
-	SevenSwitch *sw = [self switchView];
-    sw.onColor = clr;
+	[self switchView].onColor = [newColor _color];
 }
 -(void)setBorderColor_:(id)value
 {
     TiColor *newColor = [TiUtils colorValue:value];
-	UIColor *clr = [newColor _color];
-	SevenSwitch *sw = [self switchView];
-    sw.borderColor = clr;
+	[self switchView].borderColor = [newColor _color];
 }
 -(void)setShadowColor_:(id)value
 {
     TiColor *newColor = [TiUtils colorValue:value];
-	UIColor *clr = [newColor _color];
-	SevenSwitch *sw = [self switchView];
-    sw.shadowColor = clr;
+	[self switchView].shadowColor = [newColor _color];
 }
 -(void)setValue_:(id)value
 {
@@ -129,9 +117,12 @@
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-	[super frameSizeChanged:frame bounds:bounds];
+    [super frameSizeChanged:frame bounds:bounds];
+    [switchView setFrame:frame];
+    [switchView resizeControl];
     [self setCenter:[self center]];
 }
+
 
 -(void)setCenter:(CGPoint)center
 {
@@ -157,17 +148,5 @@
 		[self.proxy fireEvent:@"change" withObject:[NSDictionary dictionaryWithObject:newValue forKey:@"value"]];
 	}
 }
-
--(CGFloat)verifyWidth:(CGFloat)suggestedWidth
-{
-	return [switchView sizeThatFits:CGSizeZero].width;
-}
-
--(CGFloat)verifyHeight:(CGFloat)suggestedHeight
-{
-	return [switchView sizeThatFits:CGSizeZero].height;
-}
-
-USE_PROXY_FOR_VERIFY_AUTORESIZING
 
 @end
