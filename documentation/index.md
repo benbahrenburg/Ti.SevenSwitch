@@ -1,39 +1,152 @@
-# SevenSwitch Module
+<h1>Ti.SevenSwitch</h1>
 
-## Description
+The Ti.SevenSwitch project allows you to use [Ben Vogelzang's](https://github.com/bvogelzang) awesome open source [SevenSwitch](https://github.com/bvogelzang/SevenSwitch) project in your Titanium iOS app.
 
-TODO: Enter your module description here
 
-## Accessing the SevenSwitch Module
+![Animation](https://raw.github.com/benbahrenburg/Ti.SevenSwitch/master/demo.gif)
 
-To access this module from JavaScript, you would do the following:
+![Default](https://raw.github.com/benbahrenburg/Ti.SevenSwitch/master/demo.png)
 
-	var SevenSwitch = require("ti.sevenswitch");
 
-The SevenSwitch variable is a reference to the Module object.	
+<h2>Before you start</h2>
+* These are iOS and Android native modules designed to work with Titanium SDK 3.1.1.GA
+* Before using this module you first need to install the package. If you need instructions on how to install a 3rd party module please read this installation guide.
 
-## Reference
+<h2>Download the compiled release</h2>
 
-TODO: If your module has an API, you should document
-the reference here.
+Download the module from the [dist folder](https://github.com/benbahrenburg/Ti.SevenSwitch/tree/master/dist)
 
-### ___PROJECTNAMEASIDENTIFIER__.function
 
-TODO: This is an example of a module function.
+<h2>Building from source?</h2>
 
-### ___PROJECTNAMEASIDENTIFIER__.property
+If you are building from source you will need to do the following:
 
-TODO: This is an example of a module property.
+Import the project into Xcode:
 
-## Usage
+* Modify the titanium.xcconfig file with the path to your Titanium installation
 
-TODO: Enter your usage example here
+<h2>Setup</h2>
 
-## Author
+* Download the latest release from the releases folder ( or you can build it yourself )
+* Install the ti.sq module. If you need help here is a "How To" [guide](https://wiki.appcelerator.org/display/guides/Configuring+Apps+to+Use+Modules). 
+* You can now use the module via the commonJS require method, example shown below.
 
-TODO: Enter your author name, email and other contact
-details you want to share here. 
+<h2>Importing the module using require</h2>
+<pre><code>
+var mod = require('ti.sevenswitch');
+</code></pre>
 
-## License
+<h2>Creating the Switch Object</h2>
+The Ti.SevenSwitch object supports a majority of the standard [Ti.UI.Switch](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Switch) properties.  The below listed properties are specific to the Ti.SevenSwitch object.
 
-TODO: Enter your license/legal information here.
+<b>Parameters</b>
+
+<b>borderColor</b> : String / Color
+
+Border color of the switch, as a color name or hex triplet.
+
+<b>shadowColor</b> : : String / Color
+
+Shadow color of the switch, as a color name or hex triplet.
+
+<b>knobColor</b> : : String / Color
+
+Color of the switch's knob.  The color is passed as a color name or hex triplet.
+
+<b>onColor</b> : : String / Color
+
+Color displayed when switch is in the "on" status.  The color is passed as a color name or hex triplet.
+
+<b>activeColor</b> : : String / Color
+
+The selection value on the Ti.SQ calendar View
+
+<b>inactiveColor</b> : : String / Color
+
+Color displayed when switch is in the "off" status.  The color is passed as a color name or hex triplet.
+
+<b>onImage</b> : String / Path
+
+Image to be displayed when switch is in the "on" state, specified as a local file path or URL.
+
+<b>offImage</b> : String / Path
+
+Image to be displayed when switch is in the "off" state, specified as a local file path or URL.
+
+<h3>Example</h3>
+Please check the module's example folder or on [github](https://github.com/benbahrenburg/Ti.SevenSwitch/tree/master/example)
+
+<pre><code>
+var mod = require('ti.sevenswitch');
+Ti.API.info("module is => " + mod);
+
+var win = Ti.UI.createWindow({
+	backgroundColor:'white', layout:'vertical'
+});
+
+win.add(Ti.UI.createLabel({
+	text:"Default", textAlign:"left", height:25, left:7, top:0
+}));
+
+var defaultSwitch = mod.createSwitch({
+	top:5, left:20, value:true, height:30, width:50
+});
+win.add(defaultSwitch);
+
+win.add(Ti.UI.createLabel({
+	text:"Sized Switch", textAlign:"left", height:25, left:7, top:15
+}));
+
+var bigSwitch = mod.createSwitch({
+	top:5, height:50, width:250, left:20, value:true
+});
+win.add(bigSwitch);
+
+win.add(Ti.UI.createLabel({
+	text:"Knob Color", textAlign:"left", height:25, left:7, top:15
+}));
+var colorKnobSwitch = mod.createSwitch({
+	top:5, left:20, height:30, width:50, value:true, knobColor:"orange"
+});
+win.add(colorKnobSwitch);
+
+win.add(Ti.UI.createLabel({
+	text:"Active/Pressed Color", textAlign:"left", height:25, left:7, top:15
+}));
+var activeColorSwitch = mod.createSwitch({
+	top:5, left:20, height:30, value:true, activeColor:"orange", height:30, width:50
+});
+win.add(activeColorSwitch);
+
+win.add(Ti.UI.createLabel({
+	text:"On Color", textAlign:"left", height:25, left:7, top:15
+}));
+var onColorSwitch = mod.createSwitch({
+	top:5, left:20, height:30, value:false, onColor:"yellow", height:30, width:50
+});
+win.add(onColorSwitch);
+
+win.add(Ti.UI.createLabel({
+	text:"Inactive Color", textAlign:"left", height:25, left:7, top:15
+}));
+var inactiveColorSwitch = mod.createSwitch({
+	top:5, left:20, height:30, value:false, inactiveColor:"blue", height:30, width:50
+});
+win.add(inactiveColorSwitch);
+
+win.open();
+</code></pre>
+
+<h2>The SevenSwitch Project</h2>
+
+SevenSwitch is an awesome project by Ben Vogelzang which brings the iOS7 style UISwitch to iOS5+.  
+
+To learn more about the project please visit [https://github.com/bvogelzang/SevenSwitch](https://github.com/bvogelzang/SevenSwitch)
+
+<h3>Twitter</h3>
+
+If you like the Titanium module,please consider following the [@benCoding Twitter](http://www.twitter.com/benCoding) for updates.
+
+<h3>Blog</h3>
+
+For module updates, Titanium tutorials and more please check out my blog at [benCoding.Com](http://benCoding.com).
