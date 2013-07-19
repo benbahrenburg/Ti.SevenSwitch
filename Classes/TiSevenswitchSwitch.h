@@ -10,6 +10,7 @@
 @interface TiSevenswitchSwitch : TiUIView<LayoutAutosizing> {
 @private
 	SevenSwitch *switchView;
+    BOOL defaultSize;
 }
 
 - (IBAction)switchChanged:(id)sender;

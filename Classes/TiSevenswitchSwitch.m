@@ -15,6 +15,18 @@
 	[switchView removeTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
+-(void)initializeState
+{
+	// This method is called right after allocating the view and
+	// is useful for initializing anything specific to the view
+    
+	[super initializeState];
+    
+    defaultSize = YES;
+    
+	NSLog(@"[INFO] initializeState");
+}
+
 -(SevenSwitch*)switchView
 {
 	if (switchView==nil)
@@ -40,6 +52,11 @@
 }
 
 #pragma mark View controller stuff
+
+-(void) setDefaultSize_:(id)value
+{
+    defaultSize = [TiUtils boolValue:value];
+}
 
 -(void) setIsRounded_:(id)value
 {
@@ -118,7 +135,10 @@
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {    
     [super frameSizeChanged:frame bounds:bounds];
-    [switchView setFrame:frame];
+    if(!defaultSize){
+        [switchView frameSizeChanged:frame bounds:bounds];
+    }
+
     [self setCenter:[self center]];
 }
 

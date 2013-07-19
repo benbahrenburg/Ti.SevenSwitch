@@ -41,5 +41,5 @@
 @property (nonatomic, strong) UIImage *offImage;
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
-
+-(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds;
 @end

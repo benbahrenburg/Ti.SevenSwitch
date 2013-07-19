@@ -208,33 +208,32 @@
 }
 
 
-- (void)updateDimensions{
-    CGRect frame = self.frame;
-    
-    // background
-    background.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-    background.layer.cornerRadius = self.isRounded ? frame.size.height * 0.5 : 2;
-    
-    // images
-    onImageView.frame = CGRectMake(0, 0, frame.size.width - frame.size.height, frame.size.height);
-    offImageView.frame = CGRectMake(frame.size.height, 0, frame.size.width - frame.size.height, frame.size.height);
-    
-    // knob
-    knob.frame = CGRectMake(1, 1, frame.size.height - 2, frame.size.height - 2);
-    knob.layer.cornerRadius = self.isRounded ? (frame.size.height * 0.5) - 1 : 2;
+-(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
+{
+    [self setFrame:frame];
+    [self setBounds:bounds];
+    isAnimating = NO;
+    self.layoutSubviews;
 }
 
-- (void)setFrame:(CGRect)newRect
-{
-    [super setFrame:newRect];
-    self.updateDimensions;
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
    if (!isAnimating) {
-       self.updateDimensions;
+       CGRect frame = self.frame;
+       
+       // background
+       background.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+       background.layer.cornerRadius = self.isRounded ? frame.size.height * 0.5 : 2;
+       
+       // images
+       onImageView.frame = CGRectMake(0, 0, frame.size.width - frame.size.height, frame.size.height);
+       offImageView.frame = CGRectMake(frame.size.height, 0, frame.size.width - frame.size.height, frame.size.height);
+       
+       // knob
+       knob.frame = CGRectMake(1, 1, frame.size.height - 2, frame.size.height - 2);
+       knob.layer.cornerRadius = self.isRounded ? (frame.size.height * 0.5) - 1 : 2;
    }
 }
 
