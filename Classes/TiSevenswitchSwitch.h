@@ -11,6 +11,8 @@
 @private
 	SevenSwitch *switchView;
     BOOL defaultSize;
+    float overrideHeight;
+    float overrideWidth;
 }
 
 - (IBAction)switchChanged:(id)sender;

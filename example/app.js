@@ -20,40 +20,11 @@ win.add(Ti.UI.createLabel({
 }));
 
 var bigSwitch = mod.createSwitch({
-	top:5, height:50, width:250, left:20, value:true
+	top:5, height:50, width:250, left:20, value:true, switchArea:{
+		height:50, width:250
+	}
 });
 win.add(bigSwitch);
 
-win.add(Ti.UI.createLabel({
-	text:"Knob Color", textAlign:"left", height:25, left:7, top:15
-}));
-var colorKnobSwitch = mod.createSwitch({
-	top:5, left:20, height:30, width:50, value:true, knobColor:"orange"
-});
-win.add(colorKnobSwitch);
-
-win.add(Ti.UI.createLabel({
-	text:"Active/Pressed Color", textAlign:"left", height:25, left:7, top:15
-}));
-var activeColorSwitch = mod.createSwitch({
-	top:5, left:20, height:30, value:true, activeColor:"orange", height:30, width:50
-});
-win.add(activeColorSwitch);
-
-win.add(Ti.UI.createLabel({
-	text:"On Color", textAlign:"left", height:25, left:7, top:15
-}));
-var onColorSwitch = mod.createSwitch({
-	top:5, left:20, height:30, value:false, onColor:"yellow", height:30, width:50
-});
-win.add(onColorSwitch);
-
-win.add(Ti.UI.createLabel({
-	text:"Inactive Color", textAlign:"left", height:25, left:7, top:15
-}));
-var inactiveColorSwitch = mod.createSwitch({
-	top:5, left:20, height:30, value:false, inactiveColor:"blue", height:30, width:50
-});
-win.add(inactiveColorSwitch);
 
 win.open();

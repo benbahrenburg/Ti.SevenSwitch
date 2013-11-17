@@ -48,6 +48,9 @@
 @synthesize isRounded;
 @synthesize on;
 
+
+#pragma mark init Methods
+
 - (id)init {
     self = [super initWithFrame:CGRectMake(0, 0, 50, 30)];
     if (self) {
@@ -82,6 +85,9 @@
 }
 
 
+/**
+ *	Setup the individual elements of the switch and set default values
+ */
 - (void)setup {
     
     // default values
@@ -130,12 +136,14 @@
 }
 
 
+#pragma mark Touch Tracking
+
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [super beginTrackingWithTouch:touch withEvent:event];
-
+    
     // start timer to detect tap later in endTrackingWithTouch:withEvent:
     startTime = [[NSDate date] timeIntervalSince1970];
-
+    
     // make the knob larger and animate to the correct color
     CGFloat activeKnobWidth = self.bounds.size.height - 2 + 5;
     isAnimating = YES;
@@ -151,33 +159,34 @@
     } completion:^(BOOL finished) {
         isAnimating = NO;
     }];
-
+    
     return YES;
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [super continueTrackingWithTouch:touch withEvent:event];
-
+    
     // Get touch location
     CGPoint lastPoint = [touch locationInView:self];
-
+    
     // update the switch to the correct visuals depending on if
     // they moved their touch to the right or left side of the switch
     if (lastPoint.x > self.bounds.size.width * 0.5)
         [self showOn:YES];
     else
         [self showOff:YES];
-
+    
     return YES;
 }
 
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [super endTrackingWithTouch:touch withEvent:event];
-
+    
     // capture time to see if this was a tap action
     double endTime = [[NSDate date] timeIntervalSince1970];
     double difference = endTime - startTime;
-
+    BOOL previousValue = self.on;
+    
     // determine if the user tapped the switch or has held it for longer
     if (difference <= 0.2) {
         CGFloat normalKnobWidth = self.bounds.size.height - 2;
@@ -187,7 +196,7 @@
     else {
         // Get touch location
         CGPoint lastPoint = [touch locationInView:self];
-
+        
         // update the switch to the correct value depending on if
         // their touch finished on the right or left side of the switch
         if (lastPoint.x > self.bounds.size.width * 0.5)
@@ -195,11 +204,14 @@
         else
             [self setOn:NO animated:YES];
     }
+    
+    if (previousValue != self.on)
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 - (void)cancelTrackingWithEvent:(UIEvent *)event {
     [super cancelTrackingWithEvent:event];
-
+    
     // just animate back to the original value
     if (self.on)
         [self showOn:YES];
@@ -208,73 +220,108 @@
 }
 
 
--(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
-{
-    [self setFrame:frame];
-    [self setBounds:bounds];
-    isAnimating = NO;
-    self.layoutSubviews;
-}
-
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-   if (!isAnimating) {
-       CGRect frame = self.frame;
-       
-       // background
-       background.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-       background.layer.cornerRadius = self.isRounded ? frame.size.height * 0.5 : 2;
-       
-       // images
-       onImageView.frame = CGRectMake(0, 0, frame.size.width - frame.size.height, frame.size.height);
-       offImageView.frame = CGRectMake(frame.size.height, 0, frame.size.width - frame.size.height, frame.size.height);
-       
-       // knob
-       knob.frame = CGRectMake(1, 1, frame.size.height - 2, frame.size.height - 2);
-       knob.layer.cornerRadius = self.isRounded ? (frame.size.height * 0.5) - 1 : 2;
-   }
+    if (!isAnimating) {
+        CGRect frame = self.frame;
+        
+        // background
+        background.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        background.layer.cornerRadius = self.isRounded ? frame.size.height * 0.5 : 2;
+        
+        // images
+        onImageView.frame = CGRectMake(0, 0, frame.size.width - frame.size.height, frame.size.height);
+        offImageView.frame = CGRectMake(frame.size.height, 0, frame.size.width - frame.size.height, frame.size.height);
+        
+        // knob
+        CGFloat normalKnobWidth = frame.size.height - 2;
+        if (self.on)
+            knob.frame = CGRectMake(frame.size.width - (normalKnobWidth + 1), 1, frame.size.height - 2, normalKnobWidth);
+        else
+            knob.frame = CGRectMake(1, 1, normalKnobWidth, normalKnobWidth);
+        
+        knob.layer.cornerRadius = self.isRounded ? (frame.size.height * 0.5) - 1 : 2;
+    }
 }
 
+
+#pragma mark Setters
+
+/*
+ *	Sets the background color when the switch is off.
+ *  Defaults to clear color.
+ */
 - (void)setInactiveColor:(UIColor *)color {
     inactiveColor = color;
     if (!self.on && !self.isTracking)
         background.backgroundColor = color;
 }
 
+/*
+ *	Sets the background color that shows when the switch is on.
+ *  Defaults to green.
+ */
 - (void)setOnColor:(UIColor *)color {
     onColor = color;
-    if (self.on && !self.isTracking)
+    if (self.on && !self.isTracking) {
         background.backgroundColor = color;
+        background.layer.borderColor = color.CGColor;
+    }
 }
 
+/*
+ *	Sets the border color that shows when the switch is off. Defaults to light gray.
+ */
 - (void)setBorderColor:(UIColor *)color {
     borderColor = color;
     if (!self.on)
         background.layer.borderColor = color.CGColor;
 }
 
+/*
+ *	Sets the knob color. Defaults to white.
+ */
 - (void)setKnobColor:(UIColor *)color {
     knobColor = color;
     knob.backgroundColor = color;
 }
 
+/*
+ *	Sets the shadow color of the knob. Defaults to gray.
+ */
 - (void)setShadowColor:(UIColor *)color {
     shadowColor = color;
     knob.layer.shadowColor = color.CGColor;
 }
 
+
+/*
+ *	Sets the image that shows when the switch is on.
+ *  The image is centered in the area not covered by the knob.
+ *  Make sure to size your images appropriately.
+ */
 - (void)setOnImage:(UIImage *)image {
     onImage = image;
     onImageView.image = image;
 }
 
+/*
+ *	Sets the image that shows when the switch is off.
+ *  The image is centered in the area not covered by the knob.
+ *  Make sure to size your images appropriately.
+ */
 - (void)setOffImage:(UIImage *)image {
     offImage = image;
     offImageView.image = image;
 }
 
+
+/*
+ *	Sets whether or not the switch edges are rounded.
+ *  Set to NO to get a stylish square switch.
+ *  Defaults to YES.
+ */
 - (void)setIsRounded:(BOOL)rounded {
     isRounded = rounded;
     
@@ -288,23 +335,21 @@
     }
 }
 
+
 /*
- * set (without animation) whether the switch is ON or OFF
+ * Set (without animation) whether the switch is on or off
  */
 - (void)setOn:(BOOL)isOn {
     [self setOn:isOn animated:NO];
 }
 
+
 /*
- * Set the state of the switch to On or Off, optionally animating the transition.
+ * Set the state of the switch to on or off, optionally animating the transition.
  */
 - (void)setOn:(BOOL)isOn animated:(BOOL)animated {
-    BOOL previousValue = self.on;
     on = isOn;
     
-    if (previousValue != isOn)
-        [self sendActionsForControlEvents:UIControlEventValueChanged];
-
     if (isOn) {
         [self showOn:animated];
     }
@@ -314,8 +359,23 @@
 }
 
 
+#pragma mark Getters
+
 /*
- * update the looks of the switch to be in the ON position
+ *	Detects whether the switch is on or off
+ *
+ *	@return	BOOL YES if switch is on. NO if switch is off
+ */
+- (BOOL)isOn {
+    return self.on;
+}
+
+
+#pragma mark State Changes
+
+
+/*
+ * update the looks of the switch to be in the on position
  * optionally make it animated
  */
 - (void)showOn:(BOOL)animated {
@@ -350,7 +410,7 @@
 
 
 /*
- * update the looks of the switch to be in the OFF position
+ * update the looks of the switch to be in the off position
  * optionally make it animated
  */
 - (void)showOff:(BOOL)animated {

@@ -9,4 +9,13 @@
 
 @implementation TiSevenswitchSwitchProxy
 
+-(NSArray *)keySequence
+{
+    return [NSArray arrayWithObjects:
+            @"switchArea",
+            @"activeColor",
+            @"inactiveColor",
+            @"color",
+            nil];
+}
 @end

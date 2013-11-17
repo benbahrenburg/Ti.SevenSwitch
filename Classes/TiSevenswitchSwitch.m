@@ -31,7 +31,12 @@
 {
 	if (switchView==nil)
 	{
-		switchView = [[SevenSwitch alloc]  initWithFrame:[self bounds]];
+        if(defaultSize){
+                switchView = [[SevenSwitch alloc]  initWithFrame:[self bounds]];
+        }else{
+             switchView = [[SevenSwitch alloc] initWithFrame:CGRectMake(0, 0, overrideWidth, overrideHeight)];
+        }
+		
 		[switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         
 		[self addSubview:switchView];
@@ -53,9 +58,12 @@
 
 #pragma mark View controller stuff
 
--(void) setDefaultSize_:(id)value
+-(void) setSwitchArea_:(id)args
 {
-    defaultSize = [TiUtils boolValue:value];
+    ENSURE_SINGLE_ARG(args,NSDictionary);
+    overrideHeight = [TiUtils floatValue:@"height" properties:args def:self.bounds.size.height];
+    overrideWidth = [TiUtils floatValue:@"width" properties:args def:self.bounds.size.width];
+    defaultSize = NO;
 }
 
 -(void) setIsRounded_:(id)value
@@ -135,9 +143,9 @@
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {    
     [super frameSizeChanged:frame bounds:bounds];
-    if(!defaultSize){
-        [switchView frameSizeChanged:frame bounds:bounds];
-    }
+//    if(!defaultSize){
+//        [switchView frameSizeChanged:frame bounds:bounds];
+//    }
 
     [self setCenter:[self center]];
 }
