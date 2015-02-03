@@ -2,8 +2,9 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.3
+version: 0.4
 apiversion: 2
+architectures: armv7 i386 x86_64 arm64
 description: Seven Switch module for Titanium
 author: Benjamin Bahrenburg
 license: MIT License
@@ -15,4 +16,4 @@ name: SevenSwitch
 moduleid: ti.sevenswitch
 guid: 949b02c7-90fa-4596-89f7-8385e83bda2f
 platform: iphone
-minsdk: 3.1.1.GA
+minsdk: 3.4.1.GA
