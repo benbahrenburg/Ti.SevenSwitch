@@ -1,4 +1,6 @@
-<h1>Ti.SevenSwitch</h1>
+[![gitTio](http://gitt.io/badge.svg)](http://gitt.io/component/ti.sevenswitch)
+
+## Ti.SevenSwitch
 
 The Ti.SevenSwitch project allows you to use [Ben Vogelzang's](https://github.com/bvogelzang) awesome open source [SevenSwitch](https://github.com/bvogelzang/SevenSwitch) project in your Titanium iOS app.
 
@@ -8,16 +10,21 @@ The Ti.SevenSwitch project allows you to use [Ben Vogelzang's](https://github.co
 ![Default](https://raw.github.com/benbahrenburg/Ti.SevenSwitch/master/demo.png)
 
 
-<h2>Before you start</h2>
-* These are iOS and Android native modules designed to work with Titanium SDK 3.1.1.GA
+### Before you start
+* These are iOS and Android native modules designed to work with Titanium SDK 3.4.1.GA
 * Before using this module you first need to install the package. If you need instructions on how to install a 3rd party module please read this installation guide.
 
-<h2>Download the compiled release</h2>
+
+### Get it via Gitt.io
+
+`$ gittio install Ti.SevenSwitch`
+
+### Download the compiled release
 
 Download the module from the [dist folder](https://github.com/benbahrenburg/Ti.SevenSwitch/tree/master/dist)
 
 
-<h2>Building from source?</h2>
+### Building from source?
 
 If you are building from source you will need to do the following:
 
@@ -25,19 +32,19 @@ Import the project into Xcode:
 
 * Modify the titanium.xcconfig file with the path to your Titanium installation
 
-<h2>Setup</h2>
+### Setup
 
 * Download the latest release from the releases folder ( or you can build it yourself )
 * Install the ti.sq module. If you need help here is a "How To" [guide](https://wiki.appcelerator.org/display/guides/Configuring+Apps+to+Use+Modules). 
 * You can now use the module via the commonJS require method, example shown below.
 
-<h2>Importing the module using require</h2>
+### Importing the module using require
 
 ```js
 var mod = require('ti.sevenswitch');
 ```
 
-<h2>Creating the Switch Object</h2>
+### Creating the Switch Object
 The Ti.SevenSwitch object supports a majority of the standard [Ti.UI.Switch](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Switch) properties.  The below listed properties are specific to the Ti.SevenSwitch object.
 
 <b>Parameters</b>
@@ -74,7 +81,8 @@ Image to be displayed when switch is in the "on" state, specified as a local fil
 
 Image to be displayed when switch is in the "off" state, specified as a local file path or URL.
 
-<h3>Example</h3>
+### Example
+
 Please check the module's example folder or on [github](https://github.com/benbahrenburg/Ti.SevenSwitch/tree/master/example)
 
 ```js
@@ -138,16 +146,16 @@ win.add(inactiveColorSwitch);
 win.open();
 ```
 
-<h2>The SevenSwitch Project</h2>
+### The SevenSwitch Project
 
 SevenSwitch is an awesome project by Ben Vogelzang which brings the iOS7 style UISwitch to iOS5+.  
 
 To learn more about the project please visit [https://github.com/bvogelzang/SevenSwitch](https://github.com/bvogelzang/SevenSwitch)
 
-<h3>Twitter</h3>
+### Twitter
 
 If you like the Titanium module,please consider following the [@benCoding Twitter](http://www.twitter.com/benCoding) for updates.
 
-<h3>Blog</h3>
+### Blog
 
 For module updates, Titanium tutorials and more please check out my blog at [benCoding.Com](http://benCoding.com).
