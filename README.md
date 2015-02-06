@@ -32,9 +32,10 @@ Import the project into Xcode:
 * You can now use the module via the commonJS require method, example shown below.
 
 <h2>Importing the module using require</h2>
-<pre><code>
+
+```js
 var mod = require('ti.sevenswitch');
-</code></pre>
+```
 
 <h2>Creating the Switch Object</h2>
 The Ti.SevenSwitch object supports a majority of the standard [Ti.UI.Switch](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Switch) properties.  The below listed properties are specific to the Ti.SevenSwitch object.
@@ -76,7 +77,7 @@ Image to be displayed when switch is in the "off" state, specified as a local fi
 <h3>Example</h3>
 Please check the module's example folder or on [github](https://github.com/benbahrenburg/Ti.SevenSwitch/tree/master/example)
 
-<pre><code>
+```js
 var mod = require('ti.sevenswitch');
 Ti.API.info("module is => " + mod);
 
@@ -135,7 +136,7 @@ var inactiveColorSwitch = mod.createSwitch({
 win.add(inactiveColorSwitch);
 
 win.open();
-</code></pre>
+```
 
 <h2>The SevenSwitch Project</h2>
 
