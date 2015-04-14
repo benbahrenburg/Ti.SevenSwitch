@@ -6,3 +6,5 @@ build
 .xcuserstate
 xcuserdata
 project.xcworkspace
+.DS_Store
+modules/
