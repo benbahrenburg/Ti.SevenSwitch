@@ -23,8 +23,6 @@
 	[super initializeState];
     
     defaultSize = YES;
-    
-	NSLog(@"[INFO] initializeState");
 }
 
 -(SevenSwitch*)switchView
@@ -90,7 +88,7 @@
 -(void)setKnobColor_:(id)value
 {
     TiColor *newColor = [TiUtils colorValue:value];
-	[self switchView].knobColor = [newColor _color];
+	[self switchView].thumbTintColor = [newColor _color];
 }
 -(void)setActiveColor_:(id)value
 {
@@ -105,7 +103,7 @@
 -(void)setOnColor_:(id)value
 {
     TiColor *newColor = [TiUtils colorValue:value];
-	[self switchView].onColor = [newColor _color];
+	[self switchView].onTintColor = [newColor _color];
 }
 -(void)setBorderColor_:(id)value
 {
